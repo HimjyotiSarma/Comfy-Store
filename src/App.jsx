@@ -1,4 +1,4 @@
-import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import {
   Cart,
   Checkout,
@@ -11,58 +11,65 @@ import {
   About,
   Register,
   SingleProduct,
-} from './pages'
+  ErrorElement,
+} from "./pages";
+
+// Loaders
+
+import { loader as LandingLoader } from "./pages/Landing";
 
 function App() {
   const router = createBrowserRouter([
     {
-      path: '/',
+      path: "/",
       element: <HomeLayout />,
       errorElement: <Error />,
       children: [
         {
           index: true,
           element: <Landing />,
+          errorElement: <ErrorElement />,
+          loader: LandingLoader,
         },
         {
-          path: '/about',
+          path: "/about",
           element: <About />,
         },
         {
-          path: '/cart',
+          path: "/cart",
           element: <Cart />,
         },
         {
-          path: '/checkout',
+          path: "/checkout",
           element: <Checkout />,
         },
         {
-          path: '/orders',
+          path: "/orders",
           element: <Orders />,
         },
         {
-          path: '/products',
+          path: "/products",
           element: <Products />,
         },
         {
-          path: '/products/:id',
+          path: "/products/:id",
           element: <SingleProduct />,
         },
       ],
     },
     {
-      path: '/login',
+      path: "/login",
       element: <Login />,
       errorElement: <Error />,
     },
     {
-      path: '/register',
+      path: "/register",
       element: <Register />,
       errorElement: <Error />,
     },
-  ])
+  ]);
 
-  return <RouterProvider router={router}></RouterProvider>
+  return <RouterProvider router={router}></RouterProvider>;
 }
 
-export default App
+export default App;

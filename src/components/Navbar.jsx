@@ -2,27 +2,32 @@ import { NavLink } from "react-router-dom";
 import { BsCart3, BsMoonFill, BsSunFill } from "react-icons/bs";
 import { FaBarsStaggered } from "react-icons/fa6";
 import { NavLinks } from "./NavLinks";
-import { useState } from "react";
-
-const getInitialDarkTheme = () => {
-  const newDarkTheme = window.matchMedia(
-    "(prefers-color-scheme: dark)",
-  ).matches;
-  const storedTheme = localStorage.getItem("darkTheme");
-  console.log("Stored Theme : ", storedTheme);
-  if (storedTheme == null) {
-    return newDarkTheme;
-  }
-  return storedTheme === "true";
-};
+import { useEffect, useState } from "react";
 
 export default function Navbar() {
-  const [isDarkTheme, setDarkTheme] = useState(getInitialDarkTheme());
-  const handleChange = () => {
-    const newThemeColor = !isDarkTheme;
-    setDarkTheme(newThemeColor);
-    localStorage.setItem("darkTheme", newThemeColor);
+  const theme = {
+    bumblebee: "bumblebee",
+    forest: "forest",
   };
+  const getLocalTheme = () => {
+    const localTheme = localStorage.getItem("LocalTheme");
+    if (localTheme == null) {
+      return theme.bumblebee;
+    }
+    return localTheme;
+  };
+  const [currentTheme, setCurrentTheme] = useState(getLocalTheme());
+
+  const handleChange = () => {
+    const newTheme =
+      currentTheme == theme.bumblebee ? theme.forest : theme.bumblebee;
+    setCurrentTheme(newTheme);
+  };
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", currentTheme);
+    localStorage.setItem("LocalTheme", currentTheme);
+  }, [currentTheme]);
 
   return (
     <nav className="bg-base-200">
@@ -55,9 +60,13 @@ export default function Navbar() {
         <div className="navbar-end">
           {/* THEME SETUP */}
           <label className="swap swap-rotate">
-            <input type="checkbox" onChange={handleChange} />
-            <BsSunFill className="swap-on size-6" />
-            <BsMoonFill className="swap-off size-6" />
+            <input
+              type="checkbox"
+              onChange={handleChange}
+              className="theme-controller"
+            />
+            <BsSunFill className={`swap-on size-6`} />
+            <BsMoonFill className={`swap-off size-6`} />
           </label>
           {/* CART ICON */}
           <NavLink to="/cart" className="btn btn-circle btn-ghost btn-md ml-4">

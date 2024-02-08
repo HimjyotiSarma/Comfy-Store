@@ -3,6 +3,7 @@ import { Header, Navbar } from "../components";
 export default function HomeLayout() {
   const navigation = useNavigation();
   let isPageLoading = navigation.state === "loading";
+  console.log("Page State : ", isPageLoading);
   return (
     <>
       <Header />
