@@ -5,4 +5,8 @@ export { default as Header } from "./Header";
 export { default as Hero } from "./Hero";
 export { default as FeaturedProducts } from "./FeaturedProducts";
 export { default as ProductGrid } from "./ProductGrid";
+export { default as ProductList } from "./ProductList";
 export { default as SectionTitle } from "./SectionTitle";
+export { default as Filter } from "./Filter";
+export { default as PaginationContainer } from "./PaginationContainer";
+export { default as ProductsContainer } from "./ProductsContainer";
