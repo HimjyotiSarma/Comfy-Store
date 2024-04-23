@@ -10,3 +10,7 @@ export { default as SectionTitle } from "./SectionTitle";
 export { default as Filter } from "./Filter";
 export { default as PaginationContainer } from "./PaginationContainer";
 export { default as ProductsContainer } from "./ProductsContainer";
+export { default as Loading } from "./Loading";
+export { default as CartItem } from "./CartItem";
+export { default as CartItemList } from "./CartItemList";
+export { default as CartTotal } from "./CartTotal";

@@ -3,11 +3,20 @@ import { customFetch } from "../utils";
 
 export const loader = async ({ request }) => {
   try {
-    const response = await customFetch("/products");
+    // METHOD 1
+    // const params1 = [...new URL(request.url).searchParams];
+    // console.log(params1);
+    // const search = params.get("search");
+    // METHOD 2 : Get All Params in Key Value Pair
+    const params = Object.fromEntries([
+      ...new URL(request.url).searchParams.entries(),
+    ]);
+    const response = await customFetch("/products", {
+      params,
+    });
     const products = response.data.data;
     const meta = response.data.meta;
-    console.log(response);
-    return { products, meta };
+    return { products, meta, params };
   } catch (error) {
     console.log(error.message);
     throw new Error(
